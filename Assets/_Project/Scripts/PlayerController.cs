@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,11 +13,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     
     private CharacterController characterController;
-    private Camera playerCamera;
+    public CinemachineVirtualCamera playerCamera;
+    //private Camera playerCamera;
     private float xRotation = 0f;
     
     [HideInInspector]
     public InputActions inputActions;
+
+    [Header("Дебаг удалить")]
+    public EffectController effectController;
 
     [Header("Диалог")]
     public bool isDialogueActive = false;
@@ -35,7 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         inputActions = new InputActions();
         characterController = GetComponent<CharacterController>();
-        playerCamera = Camera.main;
+        //playerCamera = Camera.main;
     }
 
     void Start()
@@ -183,6 +188,8 @@ public class PlayerController : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInputBlocked) return;
+        effectController.TriggerHitEffects();
+        Debug.Log("Interact");
         //dialogueUI.ShowPlayerDialogue("Interact pressed");
     }
 
