@@ -46,6 +46,7 @@ public class SnakeGameManager : MonoBehaviour
     private void OnMove(InputAction.CallbackContext ctx)
     {
         _moveInput = ctx.ReadValue<Vector2>();
+        HandleInput();
     }
 
     private void InitGame()
@@ -82,7 +83,7 @@ public class SnakeGameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(stepDelay);
-            HandleInput();
+            //HandleInput();
             if (!Step()) yield break;
             DrawGrid();
             if (eatenCount >= fruitsToWin)
@@ -144,7 +145,7 @@ public class SnakeGameManager : MonoBehaviour
                 if      (pos == snake[0]) sb.Append('С');
                 else if (snake.Contains(pos)) sb.Append('+');
                 else if (pos == fruitPos) sb.Append('#');
-                else sb.Append('·');
+                else sb.Append('.');
             }
             sb.AppendLine();
         }
