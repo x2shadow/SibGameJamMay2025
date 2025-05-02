@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
         if (index == 1) 
         {
+            effectController.TriggerHitEffects();
             //firstDialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press F to throw the flare that drives away the darkness");
         }
