@@ -8,6 +8,8 @@ public class ComputerTrigger : MonoBehaviour
     public SnakeGameManager snakeManager;
     public PlayerController player;
     public GameObject promptUI;
+    public DialogueUI dialogueUI;
+    public string afterWinText;
 
     private bool inRange = false;
 
@@ -68,7 +70,7 @@ public class ComputerTrigger : MonoBehaviour
     {
         EndSession();
         Debug.Log("Победа!");
-        // можно показать сообщение “Вы выиграли”
+        dialogueUI.ShowPlayerDialogue(afterWinText);
     }
 
     private void OnLose()
