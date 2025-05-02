@@ -1038,6 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgMusic: {fileID: 1727529417}
+  placebo: {fileID: 8300000, guid: 83cdf2121d04fdd4caa4c559db37810d, type: 3}
 --- !u!4 &1727529419
 Transform:
   m_ObjectHideFlags: 0

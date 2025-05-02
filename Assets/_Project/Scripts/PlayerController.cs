@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
 
         if (index == 1) 
         {
-            effectController.TriggerHitEffects();
             //firstDialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press F to throw the flare that drives away the darkness");
         }
@@ -120,6 +119,9 @@ public class PlayerController : MonoBehaviour
         {
             dialogueTarget = null;
             nextPartTrigger1.SetActive(true);
+            effectController.TriggerHitEffects();
+            AudioManager.Instance.PlayPlacebo();
+
             //secondPart1DialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press E to play the game");
         }
@@ -189,8 +191,8 @@ public class PlayerController : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInputBlocked) return;
-        effectController.TriggerHitEffects();
-        Debug.Log("Interact");
+        //effectController.TriggerHitEffects();
+        //Debug.Log("Interact");
         //dialogueUI.ShowPlayerDialogue("Interact pressed");
     }
 

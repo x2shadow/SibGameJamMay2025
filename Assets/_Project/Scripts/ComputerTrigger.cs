@@ -77,7 +77,11 @@ public class ComputerTrigger : MonoBehaviour
         Debug.Log("Победа!");
         isWon = true;
         dialogueUI.ShowPlayerDialogue(afterWinText);
-        if (dialogueTrigger2 != null) dialogueTrigger2.SetActive(true);
+        if (dialogueTrigger2 != null)
+        {
+            dialogueTrigger2.SetActive(true);
+            AudioManager.Instance.FadeOut();
+        }
     }
 
     private void OnLose()

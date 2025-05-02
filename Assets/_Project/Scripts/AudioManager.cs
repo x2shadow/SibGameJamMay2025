@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("Настройки фоновой музыки")]
     public AudioSource bgMusic;
+    public AudioClip placebo;
+    public AudioClip ambient;
+    public float fadeDuration = 3f;
 
     private void Awake()
     {
@@ -19,5 +23,36 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void FadeOut()
+    {
+        StartCoroutine(FadeOutEffect());
+    }
+
+    private IEnumerator FadeOutEffect()
+    {
+        float timer = 0f;
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            bgMusic.volume = 0.1f - Mathf.Clamp01(timer / fadeDuration) / 10f;
+            yield return null;
+        }
+        bgMusic.volume = 0f;
+    }
+
+    public void PlayPlacebo()
+    {
+        bgMusic.volume = 0.1f;
+        bgMusic.clip = placebo;
+        bgMusic.Play();
+    }
+
+    public void PlayAmbient()
+    {
+        bgMusic.volume = 0.1f;
+        bgMusic.clip = ambient;
+        bgMusic.Play();
     }
 }

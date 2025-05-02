@@ -14,7 +14,22 @@ public class FadeOut : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(FadeOutEffect());   
+        if (nextSceneName == "Intro2")
+        {
+            StartCoroutine(Part2Music());
+        }
+        else
+        {
+            StartCoroutine(FadeOutEffect());   
+        }
+    }
+
+    private IEnumerator Part2Music()
+    {
+        AudioManager.Instance.FadeOut();
+        yield return new WaitForSeconds(3f); // Audio FadeOut duration
+        StartCoroutine(FadeOutEffect());
+        AudioManager.Instance.PlayAmbient();
     }
 
     public void StartFadeOut()
