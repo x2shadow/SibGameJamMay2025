@@ -10,8 +10,10 @@ public class ComputerTrigger : MonoBehaviour
     public GameObject promptUI;
     public DialogueUI dialogueUI;
     public string afterWinText;
+    public GameObject dialogueTrigger2;
 
     private bool inRange = false;
+    private bool isWon = false;
 
     void Awake()
     {
@@ -33,6 +35,8 @@ public class ComputerTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isWon) return;
+
         if (other.GetComponent<PlayerController>() != null)
         {
             inRange = true;
@@ -51,6 +55,7 @@ public class ComputerTrigger : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext ctx)
     {
+        if (isWon) return;
         if (!inRange) return;
 
         promptUI.SetActive(false);
@@ -70,7 +75,9 @@ public class ComputerTrigger : MonoBehaviour
     {
         EndSession();
         Debug.Log("Победа!");
+        isWon = true;
         dialogueUI.ShowPlayerDialogue(afterWinText);
+        if (dialogueTrigger2 != null) dialogueTrigger2.SetActive(true);
     }
 
     private void OnLose()

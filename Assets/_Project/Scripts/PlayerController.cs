@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public Transform dialogueTarget;
     public float dialogueRotationSpeed = 10f;
     public DialogueUI dialogueUI;
+    public GameObject nextPartTrigger1;
 
     [Header("Пауза")]
     [SerializeField] private GameObject pauseCanvas; 
@@ -109,14 +110,17 @@ public class PlayerController : MonoBehaviour
             //dialogueUI.ShowTutorialDialogue("Press F to throw the flare that drives away the darkness");
         }
 
-        if (index == 21) 
+        if (index == 2) 
         {
+            dialogueTarget = null;
+            nextPartTrigger1.SetActive(true);
             //secondPart1DialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press E to play the game");
         }
 
-        if (index == 4)
+        if (index == 3)
         {
+            dialogueTarget = null;
             //fourthDialogueHappened = true; 
             //qteMinigame.StartQTE(inputActions.Player.Spam);
         }
