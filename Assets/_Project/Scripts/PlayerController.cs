@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInputBlocked) return;
-        dialogueUI.ShowPlayerDialogue("Interact pressed");
+        //dialogueUI.ShowPlayerDialogue("Interact pressed");
     }
 
     public void SetInputBlocked(bool blocked)
