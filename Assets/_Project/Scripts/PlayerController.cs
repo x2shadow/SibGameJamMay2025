@@ -22,19 +22,13 @@ public class PlayerController : MonoBehaviour
     public bool isDialogueActive = false;
     public Transform dialogueTarget;
     public float dialogueRotationSpeed = 10f;
+    public DialogueUI dialogueUI;
 
     [Header("Пауза")]
     [SerializeField] private GameObject pauseCanvas; 
     private bool isPaused = false;
 
     private bool isInputBlocked = false;
-
-    bool firstDialogueHappened  = false;
-    bool secondPart1DialogueHappened = false;
-    bool secondPart2DialogueHappened = false;
-    bool thirdDialogueHappened = false;
-    public bool fourthDialogueHappened = false;
-    public bool exitedEnding1 = false;
 
     private void Awake()
     {
@@ -60,7 +54,7 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Move.canceled += OnMove;
         inputActions.Player.Look.performed += OnLook;
         inputActions.Player.Look.canceled += OnLook;
-        inputActions.Player.Click.performed += OnClick;
+        //inputActions.Player.Click.performed += OnClick;
         inputActions.Player.Interact.performed += OnInteract;
         inputActions.Player.Pause.performed += OnPause;
     }
@@ -73,7 +67,7 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Move.canceled -= OnMove;
         inputActions.Player.Look.performed -= OnLook;
         inputActions.Player.Look.canceled -= OnLook;
-        inputActions.Player.Click.performed -= OnClick;
+        //inputActions.Player.Click.performed -= OnClick;
         inputActions.Player.Interact.performed -= OnInteract;
         inputActions.Player.Pause.performed -= OnPause;
     }
@@ -111,19 +105,19 @@ public class PlayerController : MonoBehaviour
 
         if (index == 1) 
         {
-            firstDialogueHappened = true; 
+            //firstDialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press F to throw the flare that drives away the darkness");
         }
 
         if (index == 21) 
         {
-            secondPart1DialogueHappened = true; 
+            //secondPart1DialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press E to play the game");
         }
 
         if (index == 4)
         {
-            fourthDialogueHappened = true; 
+            //fourthDialogueHappened = true; 
             //qteMinigame.StartQTE(inputActions.Player.Spam);
         }
     }
@@ -185,12 +179,7 @@ public class PlayerController : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInputBlocked) return;
-    }
-
-    private void OnClick(InputAction.CallbackContext context)
-    {
-        if (isInputBlocked) return;
-       
+        dialogueUI.ShowPlayerDialogue("Interact pressed");
     }
 
     public void SetInputBlocked(bool blocked)
