@@ -314,8 +314,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64d9727cf7221f14abe312f48ef5564d, type: 2}
+  m_sharedMaterial: {fileID: -7603054080564421930, guid: 64d9727cf7221f14abe312f48ef5564d,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1039,6 +1040,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgMusic: {fileID: 1727529417}
   placebo: {fileID: 8300000, guid: 83cdf2121d04fdd4caa4c559db37810d, type: 3}
+  ambient: {fileID: 0}
+  fadeDuration: 3
 --- !u!4 &1727529419
 Transform:
   m_ObjectHideFlags: 0
