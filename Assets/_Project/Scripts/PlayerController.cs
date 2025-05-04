@@ -202,5 +202,16 @@ public class PlayerController : MonoBehaviour
     public void SetInputBlocked(bool blocked)
     {
         isInputBlocked = blocked;
+        if (blocked)
+        {
+            moveInput = Vector2.zero;
+            lookInput = Vector2.zero;
+        }
+    }
+
+
+    public void SetInputBlocked2(bool blocked)
+    {
+        isInputBlocked = blocked;
     }
 }

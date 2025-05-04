@@ -26,6 +26,3 @@ MonoBehaviour:
   - speaker: 0
     text: "\u0423\u0412\u041B\u0401\u041A\u0421\u042F, \u0414A?!?!?!!!"
     duration: 2
-  - speaker: 1
-    text: "*\u041F\u043B\u0430\u0447\u0435\u0442*"
-    duration: 2

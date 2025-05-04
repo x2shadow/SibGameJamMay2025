@@ -10,6 +10,7 @@ public class EndGameController : MonoBehaviour
     public Transform nuggetBox;
     public CanvasGroup thankYouCanvasGroup;
     public CinemachineVirtualCamera vcam;
+    public AudioSource audioSource;
 
     [Header("Параметры полёта")]
     public float flyDuration = 1.5f;
@@ -41,6 +42,8 @@ public class EndGameController : MonoBehaviour
 
         thankYouCanvasGroup.alpha = 0f;
         thankYouCanvasGroup.gameObject.SetActive(false);
+
+        audioSource.Play();
 
         StartCoroutine(EndSequenceRoutine());
     }

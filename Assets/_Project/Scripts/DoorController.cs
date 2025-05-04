@@ -5,6 +5,7 @@ public class DoorController : MonoBehaviour
 {
     [Header("Ссылки")]
     public Transform door;           // сам объект двери
+    public AudioSource audioSource;
 
     [Header("Параметры открытия")]
     public Vector3 openOffset = new Vector3(2f, 0f, 0f);  // куда и сколько должна уехать дверь
@@ -37,10 +38,21 @@ public class DoorController : MonoBehaviour
 
     private void StartMove(Vector3 targetLocalPos)
     {
+        // Если уже на нужной позиции — ничего не делаем
+        if (door.localPosition == targetLocalPos) return;
+
         // Отменяем текущее движение (если было)
         if (moveRoutine != null) StopCoroutine(moveRoutine);
+
+        // Проигрываем звук перед началом движения
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play(); // или .PlayOneShot(clip)
+        }
+
         moveRoutine = StartCoroutine(MoveDoor(targetLocalPos));
     }
+
 
     private IEnumerator MoveDoor(Vector3 targetLocalPos)
     {

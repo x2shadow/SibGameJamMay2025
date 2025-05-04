@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class SnakeGameManager : MonoBehaviour
 {
     [Header("Настройки сетки")]
-    public int width = 100, height = 100;
+    public int width = 20, height = 20;
     public float stepDelay = 0.2f;
-    public TMP_Text gridText;             // UI Text
+    public TMP_Text gridText;
     public int fruitsToWin = 10;
+
+    [Header("Звуки движения")]
+    public AudioSource audioSource;       // ссылка на AudioSource
+    public List<AudioClip> moveSounds;    // список клипов для ходьбы
 
     private enum Cell { Empty, Snake, Fruit }
     private Cell[,] grid;
@@ -31,31 +34,51 @@ public class SnakeGameManager : MonoBehaviour
     public void Init(InputActions actions, Action onWinCallback, Action onLoseCallback)
     {
         _actions = actions;
-        onWin = onWinCallback;
-        onLose = onLoseCallback;
+        onWin   = onWinCallback;
+        onLose  = onLoseCallback;
 
-        // подпишемся на ввод
+        // Input
         _actions.Snake.Move.performed += OnMove;
         _actions.Snake.Move.canceled  += OnMove;
-
         _actions.Snake.Enable();
+
         InitGame();
         gameLoop = StartCoroutine(GameLoop());
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        _moveInput = ctx.ReadValue<Vector2>();
+        // Сначала читаем ввод
+        Vector2 newInput = ctx.ReadValue<Vector2>();
+
+        // Только по событию performed и если игрок реально нажимает в каком-то направлении
+        if (ctx.performed && (Mathf.Abs(newInput.x) > 0.5f || Mathf.Abs(newInput.y) > 0.5f))
+        {
+            PlayRandomMoveSound();
+        }
+
+        // Обновляем направление
+        _moveInput = newInput;
         HandleInput();
+    }
+
+    private void PlayRandomMoveSound()
+    {
+        if (audioSource == null || moveSounds == null || moveSounds.Count == 0) 
+            return;
+
+        int idx = UnityEngine.Random.Range(0, moveSounds.Count);
+        AudioClip clip = moveSounds[idx];
+        audioSource.PlayOneShot(clip);
     }
 
     private void InitGame()
     {
-        // сбросим всё
         if (gameLoop != null) StopCoroutine(gameLoop);
-        grid    = new Cell[width, height];
-        snake   = new List<Vector2Int> { new Vector2Int(width/2, height/2) };
-        dir     = Vector2Int.right;
+
+        grid       = new Cell[width, height];
+        snake      = new List<Vector2Int> { new Vector2Int(width/2, height/2) };
+        dir        = Vector2Int.right;
         eatenCount = 0;
         SpawnFruit();
         DrawGrid();
@@ -83,7 +106,6 @@ public class SnakeGameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(stepDelay);
-            //HandleInput();
             if (!Step()) yield break;
             DrawGrid();
             if (eatenCount >= fruitsToWin)
@@ -97,24 +119,19 @@ public class SnakeGameManager : MonoBehaviour
 
     private void HandleInput()
     {
-        if (_moveInput.y > 0.5f && dir != Vector2Int.down)    dir = Vector2Int.up;
-        else if (_moveInput.y < -0.5f && dir != Vector2Int.up) dir = Vector2Int.down;
-        else if (_moveInput.x < -0.5f && dir != Vector2Int.right) dir = Vector2Int.left;
+        if (_moveInput.y > 0.5f && dir != Vector2Int.down)       dir = Vector2Int.up;
+        else if (_moveInput.y < -0.5f && dir != Vector2Int.up)   dir = Vector2Int.down;
+        else if (_moveInput.x < -0.5f && dir != Vector2Int.right)dir = Vector2Int.left;
         else if (_moveInput.x > 0.5f && dir != Vector2Int.left)  dir = Vector2Int.right;
     }
 
     private bool Step()
     {
         var newHead = snake[0] + dir;
-        // границы
-        if (newHead.x < 0 || newHead.x >= width || newHead.y < 0 || newHead.y >= height)
-        {
-            CleanUp();
-            onLose?.Invoke();
-            return false;
-        }
-        // самопересечение
-        if (snake.Contains(newHead))
+
+        if (newHead.x < 0 || newHead.x >= width ||
+            newHead.y < 0 || newHead.y >= height ||
+            snake.Contains(newHead))
         {
             CleanUp();
             onLose?.Invoke();
@@ -141,11 +158,11 @@ public class SnakeGameManager : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                var pos = new Vector2Int(x,y);
-                if      (pos == snake[0]) sb.Append('С');
+                var pos = new Vector2Int(x, y);
+                if      (pos == snake[0])    sb.Append('С');
                 else if (snake.Contains(pos)) sb.Append('+');
-                else if (pos == fruitPos) sb.Append('#');
-                else sb.Append('.');
+                else if (pos == fruitPos)     sb.Append('#');
+                else                          sb.Append('.');
             }
             sb.AppendLine();
         }
@@ -154,7 +171,6 @@ public class SnakeGameManager : MonoBehaviour
 
     private void CleanUp()
     {
-        // отписка и выключение карты
         _actions.Snake.Move.performed -= OnMove;
         _actions.Snake.Move.canceled  -= OnMove;
         _actions.Snake.Disable();
