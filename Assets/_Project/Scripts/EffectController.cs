@@ -13,6 +13,8 @@ public class EffectController : MonoBehaviour
     public CanvasGroup redFlashGroup;
     public float flashDuration = 0.2f;
 
+    public Animator animator;
+
     [Header("Glitch")]
     public Behaviour glitchEffect; // например, Volume override или скрипт
 
@@ -27,9 +29,12 @@ public class EffectController : MonoBehaviour
         impulseSource.GenerateImpulse();
         Debug.Log("Screen Shake");
 
+        if (animator != null) animator.SetTrigger("CRY");
+
         // 2) Красный фильтр
         yield return FadeCanvasGroup(redFlashGroup, 0f, 1f, flashDuration/2);
         yield return FadeCanvasGroup(redFlashGroup, 1f, 0f, flashDuration/2);
+
 
         // 3) Glitch
         //glitchEffect.enabled = true;
