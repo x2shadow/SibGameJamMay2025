@@ -471,8 +471,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1053,6 +1053,7 @@ MonoBehaviour:
   dialogueUI: {fileID: 1810043628}
   nextPartTrigger1: {fileID: 473559560}
   invisibleStartWall: {fileID: 971181953}
+  invisibleStartWall2: {fileID: 0}
   pauseCanvas: {fileID: 478405469}
 --- !u!1 &473559560
 GameObject:
@@ -3304,6 +3305,7 @@ MonoBehaviour:
   afterWinText: "\u0412\u043E\u0442 \u0442\u0435\u043F\u0435\u0440\u044C \u043C\u043E\u0436\u043D\u043E
     \u0438 \u043F\u043E\u043A\u0443\u0448\u0430\u0442\u044C"
   dialogueTrigger2: {fileID: 5209327}
+  dialogueTrigger4: {fileID: 0}
   plate: {fileID: 691315395}
   cameraRotationSpeed: 10
   restoreDuration: 0.5
@@ -3421,7 +3423,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aa9c49193d3e7d340b41aeb4cb4e3e34, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 527de9ad22745ef48b123bdd4c2369fc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
@@ -3520,8 +3522,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgMusic: {fileID: 1196656364}
-  placebo: {fileID: 8300000, guid: 83cdf2121d04fdd4caa4c559db37810d, type: 3}
-  ambient: {fileID: 8300000, guid: 97002de27eed5eb4cbf6267d2c702aef, type: 3}
+  placebo: {fileID: 8300000, guid: bea163fa371e8e046a5b324530e37a95, type: 3}
+  ambient: {fileID: 8300000, guid: 9e5fcd503003d22429910761a2658391, type: 3}
   fadeDuration: 3
 --- !u!4 &1196656366
 Transform:
@@ -3977,8 +3979,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
