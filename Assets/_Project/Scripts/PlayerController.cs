@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public float dialogueRotationSpeed = 10f;
     public DialogueUI dialogueUI;
     public GameObject nextPartTrigger1;
+    public GameObject invisibleStartWall;
+    public GameObject invisibleStartWall2;
 
     [Header("Пауза")]
     [SerializeField] private GameObject pauseCanvas; 
@@ -111,6 +113,7 @@ public class PlayerController : MonoBehaviour
 
         if (index == 1) 
         {
+            invisibleStartWall.SetActive(false);
             //firstDialogueHappened = true; 
             //dialogueUI.ShowTutorialDialogue("Press F to throw the flare that drives away the darkness");
         }
@@ -121,16 +124,16 @@ public class PlayerController : MonoBehaviour
             nextPartTrigger1.SetActive(true);
             effectController.TriggerHitEffects();
             AudioManager.Instance.PlayPlacebo();
-
-            //secondPart1DialogueHappened = true; 
-            //dialogueUI.ShowTutorialDialogue("Press E to play the game");
         }
 
         if (index == 3)
         {
             dialogueTarget = null;
-            //fourthDialogueHappened = true; 
-            //qteMinigame.StartQTE(inputActions.Player.Spam);
+        }
+
+        if (index == 4)
+        {
+            invisibleStartWall2.SetActive(false);
         }
     }
 

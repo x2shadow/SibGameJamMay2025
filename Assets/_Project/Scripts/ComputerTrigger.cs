@@ -11,6 +11,8 @@ public class ComputerTrigger : MonoBehaviour
     public DialogueUI dialogueUI;
     public string afterWinText;
     public GameObject dialogueTrigger2;
+    public GameObject dialogueTrigger4;
+    public GameObject plate;
 
     [Header("Поворот камеры")]
     public float cameraRotationSpeed = 10f;
@@ -111,6 +113,12 @@ public class ComputerTrigger : MonoBehaviour
             cameraRotationSpeed * Time.deltaTime
         );
 
+        player.playerCamera.transform.rotation = Quaternion.Slerp(
+            player.transform.rotation,
+            targetRotation,
+            cameraRotationSpeed * Time.deltaTime
+        );
+
         // Если угол маленький — завершаем
         if (Quaternion.Angle(player.transform.rotation, targetRotation) < 0.5f)
         {
@@ -135,7 +143,13 @@ public class ComputerTrigger : MonoBehaviour
         if (dialogueTrigger2 != null)
         {
             dialogueTrigger2.SetActive(true);
+            plate.SetActive(true);
             AudioManager.Instance.FadeOut();
+        }
+
+        if (dialogueTrigger4 != null)
+        {
+            dialogueTrigger4.SetActive(true);
         }
     }
 

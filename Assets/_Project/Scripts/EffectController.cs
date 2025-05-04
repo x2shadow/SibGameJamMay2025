@@ -33,7 +33,7 @@ public class EffectController : MonoBehaviour
 
         // 2) Красный фильтр
         yield return FadeCanvasGroup(redFlashGroup, 0f, 1f, flashDuration/2);
-        yield return FadeCanvasGroup(redFlashGroup, 1f, 0f, flashDuration/2);
+        yield return FadeCanvasGroup(redFlashGroup, 1f, 0.5f, flashDuration/2);
 
 
         // 3) Glitch
