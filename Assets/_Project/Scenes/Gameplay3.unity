@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd034128b077c442b81e38200aff40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   mouseSensitivity: 70
   playerCamera: {fileID: 2055024517}
   effectController: {fileID: 1208766087}

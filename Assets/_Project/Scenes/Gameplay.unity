@@ -3045,7 +3045,7 @@ MonoBehaviour:
   height: 9
   stepDelay: 0.2
   gridText: {fileID: 991465413}
-  fruitsToWin: 3
+  fruitsToWin: 7
   audioSource: {fileID: 954063993}
   moveSounds:
   - {fileID: 8300000, guid: 53b520965d0343745b28e705e17829dc, type: 3}
