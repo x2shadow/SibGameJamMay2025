@@ -158,16 +158,16 @@ MonoBehaviour:
   active: 1
   fogDensity:
     m_OverrideState: 1
-    m_Value: 4.1
+    m_Value: 4
   fogDistance:
     m_OverrideState: 1
     m_Value: 2
   fogColor:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 0}
+    m_Value: {r: 0, g: 0, b: 0, a: 0}
   ambientColor:
     m_OverrideState: 1
-    m_Value: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
+    m_Value: {r: 0, g: 0, b: 0, a: 0}
   fogNear:
     m_OverrideState: 0
     m_Value: 0
